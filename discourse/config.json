@@ -1,0 +1,16 @@
+{
+	"users" : {
+		"makarand_b": "Makarand Bauskar",
+		"Sangram": "Sangram Patil",
+		"kolate_sambhaji": "Sambhaji Kolate",
+		"Geetanjali": "Geetanjali Shitole",
+		"sagar": "Sagar Shirgawakar",
+		"priya_s": "Priya Shitole",
+		"gangadhar_k": "Gangadhar Kadam",
+		"Nikhil_R": "Nikhil Ranjane",
+		"ravindra_l": "Ravindra Lakal",
+		"shraddha": "Shraddha Ranjane"
+	},
+	"base_url": "https://discuss.erpnext.com",
+	"activity_url": "{base_url}/user_actions.json?username={username}&filter=5,6&acting_username={username}&order=created_at&ascending=false"
+}
