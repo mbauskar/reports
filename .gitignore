@@ -1,0 +1,10 @@
+*.pyc
+*.py~
+*.swp
+*.sql
+
+# Distribution / packaging
+bin/
+include/
+lib/
+local/
