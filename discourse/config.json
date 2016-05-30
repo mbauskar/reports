@@ -1,4 +1,10 @@
 {
+	"db_config": {
+		"db": "activity_report",
+		"passwd": "password",
+		"user": "root",
+		"host": "localhost"
+	},
 	"users" : {
 		"makarand_b": "Makarand Bauskar",
 		"Sangram": "Sangram Patil",
