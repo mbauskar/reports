@@ -1,19 +1,33 @@
-<style type="text/css">
-	.pure-table{border-collapse:collapse;border-spacing:0;empty-cells:show;border:1px solid #cbcbcb}.pure-table caption{color:#000;font:italic 85%/1 arial,sans-serif;padding:1em 0;text-align:center}.pure-table td,.pure-table th{border-left:1px solid #cbcbcb;border-width:0 0 0 1px;font-size:inherit;margin:0;overflow:visible;padding:.25em 1em}.pure-table td:first-child,.pure-table th:first-child{border-left-width:0}.pure-table thead{background-color:#e0e0e0;color:#000;text-align:left;vertical-align:bottom}.pure-table td{background-color:transparent}.pure-table-odd td{background-color:#f2f2f2}.pure-table-striped tr:nth-child(2n-1) td{background-color:#f2f2f2}.pure-table-bordered td{border-bottom:1px solid #cbcbcb}.pure-table-bordered tbody>tr:last-child>td{border-bottom-width:0}.pure-table-horizontal td,.pure-table-horizontal th{border-width:0 0 1px;border-bottom:1px solid #cbcbcb}.pure-table-horizontal tbody>tr:last-child>td{border-bottom-width:0}
-</style>
-
-<table class="pure-table pure-table-bordered" width="85%" align="center">
-	<thead>
-		<tr>
-			<td>#</td>
-			<td>Topic</td>
-			<td># Reply</td>
-			<td>Latest Date</td>
-		</tr>
-	</thead>
-	<tbody>
-		{% for summary in user_wise_summary %}
-		{{ summary }}
-		{% endfor %}
-	</tbody>
-</table>
+<div>
+	<p><b>Respected Sir/Madam,</b></p>
+	<p>Please find the User's Discuss forum activity report for the past week from {{ from_date }} to {{ to_date }}</p>
+	<table style="border-collapse: collapse;border-spacing: 0;empty-cells: show;border: 1px solid #cbcbcb;" width="85%" align="center">
+		<thead style="background-color: #e0e0e0;color: #000;text-align: left;vertical-align: bottom;">
+			<tr style="border: 1px solid #cbcbcb;">
+				<td style="border-left: 1px solid #cbcbcb;border-width: 0 0 0 1px;font-size: inherit;margin: 0;overflow: visible;padding: .25em 1em;background-color: transparent;">#</td>
+				<td style="border-left: 1px solid #cbcbcb;border-width: 0 0 0 1px;font-size: inherit;margin: 0;overflow: visible;padding: .25em 1em;background-color: transparent;">Topic</td>
+				<td style="border-left: 1px solid #cbcbcb;border-width: 0 0 0 1px;font-size: inherit;margin: 0;overflow: visible;padding: .25em 1em;background-color: transparent;"># Reply</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user, topics in user_wise_summary.iteritems() %}
+				<tr style="border: 1px solid #cbcbcb;">
+					<td style="border-left: 1px solid #cbcbcb;border-width: 0 0 0 1px;font-size: inherit;margin: 0;overflow: visible;padding: .25em 1em;background-color: transparent;" colspan="2"><b>{{ users.get(user).get("fullname") }}</b></td>
+					<td align="right" style="border-left: 1px solid #cbcbcb;border-width: 0 0 0 1px;font-size: inherit;margin: 0;overflow: visible;padding: .25em 1em;background-color: transparent;"><b>Total # {{ totals.get(user, 0) }}</b></td>
+				</tr>
+				{% for url, topic in topics.iteritems() %}
+				<tr style="border: 1px solid #cbcbcb;">
+					<td style="border-left: 1px solid #cbcbcb;border-width: 0 0 0 1px;font-size: inherit;margin: 0;overflow: visible;padding: .25em 1em;background-color: transparent;">{{ loop.index }}</td>
+					<td style="border-left: 1px solid #cbcbcb;border-width: 0 0 0 1px;font-size: inherit;margin: 0;overflow: visible;padding: .25em 1em;background-color: transparent;" width="70%"><a href="{{ base_url }}/t/{{ url }}/{{ topic[0].get('topic_id') }}">{{ topic[0].get("title") or "" }}</a></td>
+					<td style="border-left: 1px solid #cbcbcb;border-width: 0 0 0 1px;font-size: inherit;margin: 0;overflow: visible;padding: .25em 1em;background-color: transparent;" align="right">{{ topic|length or "" }}</td>
+				</tr>
+				{% endfor %}
+			{% endfor %}
+		</tbody>
+	</table>
+	<p style="font-size: 12px;">Please Note this is system generated report please go to discuss.erpnext.com for user's activity details</p>
+	<p><b>Thanks & Regards,</b><br>
+	<b>Makarand Bauskar</b><br>
+	Software Developer,<br>
+	New Indictrans Technologies Pvt Ltd. Pune</p>
+</div>
