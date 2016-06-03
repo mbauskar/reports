@@ -1,0 +1,70 @@
+{
+	"db_config": {
+		"db": "activity_report",
+		"passwd": "password",
+		"user": "root",
+		"host": "localhost"
+	},
+	"recipients": [
+		"nikhil.k@indictranstech.com"
+	],
+	"cc": [
+		"gupteshwar@indictranstech.com",
+		"kanhaiya@indictranstech.com"
+	],
+	"sender": "makarand.b@indictranstech.com",
+	"mail_subject": "[Cequity] Reports created",
+	"date_format": "%Y-%m-%d",
+	"filename_formats": {
+		"customer": "Customer_{report_date}.csv",
+		"customer_with_points": "Customer_with_points_{report_date}.csv",
+		"customer_with_txns": "Customer_with_transaction_{report_date}.csv",
+		"product_line_per_txn": "product_line_per_transaction_{report_date}.csv",
+		"socialdata": "socialdata_{report_date}",
+		"member_points": "member_points_weekly{report_date}"
+	},
+	"daily_reports": [
+		"customer",
+		"socialdata",
+		"customer_with_txns",
+		"product_line_per_txn",
+		"customer_with_points"
+	],
+	"weekly_reports": ["member_points"],
+	"report_headers": {
+		"customer": [
+			"Store", "UID", "First Name", "Last Name", "eMail ID",
+			"Mobile Number", "Address", "Sex", "DOB", "DOA",
+			"Registered Date", "Registration Source", "Voucher", "Referred By"
+		],
+		"socialdata": [
+			"uid", "mobile", "mail", "firstname", "lastname", "media", "action", "points", "date"
+		],
+		"customer_with_txns": [
+			"Store", "UID", "First Name", "Last Name", "eMail ID", "Mobile Number",
+			"Order ID", "Order Total", "Product Count", "Order Date", "Order Status",
+			"Payment Method", "Points Earned", "Points Redeemed", "DOC NO", "Celio Customer id"
+		],
+		"product_line_per_txn": [
+			"DOC NO", "Cashier", "Store", "Order id", "Product", "Family", "Style", "UID", "Qty"
+		],
+		"customer_with_points": [
+			"Store", "UID", "First Name", "Last Name", "eMail ID",
+			"Mobile Number","Last LP", "Total LP", "Last SP", "Total SP"
+		],
+		"member_points": [
+			"uid", "Customer ID as per Celio", "Mobile", "Mail", "Firstname", "Lastname",
+			"Total Purchase Points", "Total Social Points", "Total Redeemed points"
+		]
+	},
+	"report_names": {
+		"customer": "Customer",
+		"customer_with_points": "Customer With Points",
+		"customer_with_txns": "Customer With Transaction",
+		"product_line_per_txn": "Product Line Per Transaction",
+		"socialdata": "Social Data",
+		"member_points": "Member Points (Weekly)"
+	},
+	"report_path": "/home/indictrans/Desktop/cequity_temp",
+	"notify_user": false
+}

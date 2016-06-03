@@ -49,10 +49,10 @@
 	},
 	"recipients": [
 		"gupteshwar@indictranstech.com",
-		"kanhaiya@indictranstech.com",
+		"kanhaiya@indictranstech.com"
 	],
 	"sender": "makarand.b@indictranstech.com",
-	"mail_subject": "[Report] ERPNext Discuss Forum Report ({from_date} to {to_date})",
+	"mail_subject": "[Report][User Activity] ERPNext Discuss Forum Report ({from_date} to {to_date})",
 	"base_url": "https://discuss.erpnext.com",
 	"activity_url": "{base_url}/user_actions.json?username={username}&filter=5,6&acting_username={username}&order=created_at&ascending=false"
 }
