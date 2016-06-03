@@ -160,7 +160,10 @@ def send_notification_mail(mail_pwd, results):
 	for report in results:
 		report_result += report_result_template.format(**report)
 
-	mail_content = mail_template.format(report_result=report_result)
+	mail_content = mail_template.format(
+		report_result=report_result,
+		report_path=report_path
+	)
 	send_mail(mail_pwd, recipients=recipients, sender=sender, 
 		subject=mail_subject, mail_content=mail_content, cc=cc)
 
