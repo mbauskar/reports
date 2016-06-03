@@ -49,9 +49,7 @@ def init_report(mail_pwd):
 	reports = get_report_names()
 	queries = get_queries(reports)
 	results = fetch_and_save_reports(reports, queries)
-	print results
-	# if notify_user: send_notification_mail(results)
-	send_notification_mail(mail_pwd, results)
+	if notify_user: send_notification_mail(mail_pwd, results)
 
 def get_report_date(date_format="%Y-%m-%d", str_datetime=None, as_string=True, days=1):
 	date = None
@@ -86,10 +84,10 @@ def fetch_and_save_reports(reports, queries):
 			query = queries.get(report)
 			query = query.format(report_date=report_date)
 			
-			# data = get_values(query, db_config)
-			data = []
+			data = get_values(query, db_config)
 			content = prepare_csv_data(report, data)
 			save_csv_report(report, content, report_date)
+			# print content
 
 			total_records = len(data)
 			results.append({
@@ -101,6 +99,9 @@ def fetch_and_save_reports(reports, queries):
 				"result": "CSV Created"
 			});
 		except Exception, e:
+			import traceback
+			print e
+			print traceback.print_exc()
 			results.append({
 				"report": report_names.get(report),
 				"is_sucessful": False,
@@ -119,7 +120,9 @@ def prepare_csv_data(report, data):
 		content = [header]
 	else:
 		content.append(header)
-		content.extend(["|".join(row) for row in data])
+		for row in data:
+			content.append("|".join(["%s"%val if val else "" for val in row]))
+
 	return content
 
 def create_directory(base_path, dir_name=None):
@@ -143,7 +146,9 @@ def save_csv_report(report, content, report_date):
 	)
 
 	with open(file_path, "w") as file:
-		file.writelines(content)
+		for idx, row in enumerate(content):
+			file.write(row)
+			if idx != len(content)-1: file.write("\n")
 
 def send_notification_mail(mail_pwd, results):
 	mail_template = ""

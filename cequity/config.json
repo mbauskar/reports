@@ -20,8 +20,8 @@
 		"customer_with_points": "Customer_with_points_{report_date}.csv",
 		"customer_with_txns": "Customer_with_transaction_{report_date}.csv",
 		"product_line_per_txn": "product_line_per_transaction_{report_date}.csv",
-		"socialdata": "socialdata_{report_date}",
-		"member_points": "member_points_weekly{report_date}"
+		"socialdata": "socialdata_{report_date}.csv",
+		"member_points": "member_points_weekly{report_date}.csv"
 	},
 	"daily_reports": [
 		"customer",
