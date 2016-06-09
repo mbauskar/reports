@@ -1,6 +1,7 @@
 *.pyc
 *.py~
 *.swp
+*.sql
 
 # Distribution / packaging
 bin/

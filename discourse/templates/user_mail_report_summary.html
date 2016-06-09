@@ -1,9 +1,0 @@
-<tr><td colspan="4" align="center"><b>{{ user }}</b></td></tr>
-{% for url, topic in topics.iteritems() %}
-<tr>
-	<td>{{ loop.index }}</td>
-	<td width="70%"><a href="{{ base_url }}/t/{{ url }}">{{ topic[0].get("title") or "" }}</a></td>
-	<td align="right">{{ topic|length or "" }}</td>
-	<td>{{ topic[0].get("created_at") or "" }}</td>
-</tr>
-{% endfor %}
