@@ -16,6 +16,7 @@ db_config = {}
 topic_url = "{base_url}/t/{slug}"
 recipients = []
 activity_url = ""
+keep_active_user_in_cc = False
 
 def init_report(pwd):
 	global jenv, users, base_url, activity_url, db_config, recipients, subject, sender, mail_pwd
@@ -37,6 +38,7 @@ def init_report(pwd):
 	recipients = config.get("recipients", [])
 	subject = config.get("mail_subject", {})
 	sender = config.get("sender", {})
+	keep_active_user_in_cc = config.get("keep_active_user_in_cc", False)
 	mail_pwd = pwd
 	
 	get_users_activity_records(base_url, users.keys())
@@ -217,8 +219,8 @@ def mail_activity_report(user_wise_summary):
 		to_date=format_date(date_format="%d-%b-%y", days=1)
 	)
 
-	active_users = [users.get(user).get("email") for user in user_wise_summary.keys()]
-	# recipients = active_users = ["makarand.b@indictranstech.com", "shraddha.r@indictranstech.com"]
+	if keep_active_user_in_cc:
+		active_users = [users.get(user).get("email") for user in user_wise_summary.keys()]
 
 	send_mail(mail_pwd, recipients=recipients, sender=sender, 
 		subject=mail_subject, mail_content=mail_content, cc=active_users)

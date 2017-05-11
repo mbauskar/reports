@@ -8,50 +8,66 @@
 	"users" : {
 		"makarand_b": {
 			"fullname": "Makarand Bauskar",
-			"email": "makarand.b@indictranstech.com"
+			"email": "makarand@erpnext.com"
 		},
-		"Sangram": {
-			"fullname": "Sangram Patil",
-			"email": "sangram.p@indictranstech.com"
+		"saurabh6790": {
+			"fullname": "Saurabh Palande",
+			"email": "saurabh@erpnext.com"
 		},
-		"kolate_sambhaji": {
-			"fullname": "Sambhaji Kolate",
-			"email": "sambhaji.k@indictranstech.com"
+		"rohit_w": {
+			"fullname": "Rohit Waghchaure",
+			"email": "rohit@erpnext.com"
 		},
-		"Geetanjali": {
-			"fullname": "Geetanjali Shitole",
-			"email": "geetanjali.s@indictranstech.com"
+		"rmehta": {
+			"fullname": "Rushab Mehta",
+			"email": "rushabh@erpnext.com"
 		},
-		"sagar": {
-			"fullname": "Sagar Shirgawakar",
-			"email": "sagar.s@indictranstech.com"
+		"umair": {
+			"fullname": "Umair",
+			"email": "umair@erpnext.com"
 		},
-		"priya_s": {
-			"fullname": "Priya Shitole",
-			"email": "priya.s@indictranstech.com"
+		"nabinhait": {
+			"fullname": "Nabin Hait",
+			"email": "nabin@erpnext.com"
 		},
-		"gangadhar_k": {
-			"fullname": "Gangadhar Kadam",
-			"email": "gangadhar.k@indictranstech.com"
+		"Sagar_Vora": {
+			"fullname": "Sagar Vora",
+			"email": "sagar@erpnext.com"
 		},
-		"Nikhil_R": {
-			"fullname": "Nikhil Ranjane",
-			"email": "nikhil.r@indictranstech.com"
+		"netchampfaris": {
+			"fullname": "Faris Ansari",
+			"email": "faris@erpnext.com"
 		},
-		"ravindra_l": {
-			"fullname": "Ravindra Lakal",
-			"email": "ravindra.l@indictranstech.com"
+		"pratu16x7": {
+			"fullname": "Prateeksha Singh",
+			"email": "prateeksha@erpnext.com"
 		},
-		"shraddha": {
-			"fullname": "Shraddha Ranjane",
-			"email": "shraddha.r@indictranstech.com"
-		}
+		"ArundhatiS": {
+			"fullname": "Arundhati Sharma",
+			"email": "arundhati@erpnext.com"
+		},
+		"ManasSolanki": {
+			"fullname": "Manas Solanki",
+			"email": "manas@erpnext.com"
+		},
+		"mcd-50": {
+			"fullname": "Ayush Shukla",
+			"email": "ayush@erpnext.com"
+		},
+		"ashwini_save": {
+			"fullname": "Ashwini Save",
+			"email": "ashwini@erpnext.com"
+		},
+		"prakash": {
+			"fullname": "Prakash Hodage",
+			"email": "prakash@erpnext.com"
+		},
 	},
 	"recipients": [
-		"gupteshwar@indictranstech.com",
-		"kanhaiya@indictranstech.com"
+		"team@erpnext.com"
 	],
-	"sender": "makarand.b@indictranstech.com",
+	"keep_active_user_in_cc": false,
+	"sender": "makarand.b@erpnext.com",
 	"mail_subject": "[Report][User Activity] ERPNext Discuss Forum Report ({from_date} to {to_date})",
 	"base_url": "https://discuss.erpnext.com",
 	"activity_url": "{base_url}/user_actions.json?username={username}&filter=5,6&acting_username={username}&order=created_at&ascending=false"
