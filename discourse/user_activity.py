@@ -1,5 +1,6 @@
 import sys
 import json
+import MySQLdb
 import requests
 from mail import send_mail
 from database import get_values, set_values	
@@ -137,7 +138,7 @@ def save_activity_report_to_db(user, activity_report):
 							user,
 							action.get('topic_id'),
 							action.get('post_number'),
-							action.get('title'),
+							escape(action.get('title')),
 						)
 			set_values(query, db_config)
 
@@ -253,6 +254,14 @@ def get_users_activity_records(base_url, users):
 			mail_activity_report(user_wise_summary)
 	except Exception, e:
 		raise e
+
+def escape(txt, percent=True):
+	"""Excape quotes and percent in given string."""
+	if isinstance(txt, unicode):
+		txt = (txt or "").encode("utf-8")
+
+	txt = unicode(MySQLdb.escape_string(txt), "utf-8").replace("`", "\\`")
+
 
 if __name__ == "__main__":
 	if len(sys.argv) == 2:
