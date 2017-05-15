@@ -206,7 +206,7 @@ def get_total_reply_count():
 	return totals
 
 def mail_activity_report(user_wise_summary):
-
+	active_users = []
 	mail_content = jenv.get_template("mail_template.html").render({
 						"base_url": base_url,
 						"user_wise_summary": user_wise_summary,
