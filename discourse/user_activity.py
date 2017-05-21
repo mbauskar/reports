@@ -42,7 +42,7 @@ def init_report(pwd):
 	keep_active_user_in_cc = config.get("keep_active_user_in_cc", False)
 	mail_pwd = pwd
 	
-	get_users_activity_records(base_url, users.keys())
+	get_users_activity_records(base_url, users)
 
 def format_date(date_format='%Y-%m-%d', str_datetime=None, as_string=True, days=1):
 	date = None
@@ -130,16 +130,16 @@ def save_activity_report_to_db(user, activity_report):
 		# check if activity already exists
 		if not is_saved(parent, user, action):
 			query = """ 
-						insert into `UserActivity` (parent, created_at, user, topic_id,
-						post_number, title) values (%s,'%s', '%s','%s',%s,'%s')
-					"""%(	
-							parent,
-							action.get('created_at'),
-							user,
-							action.get('topic_id'),
-							action.get('post_number'),
-							escape(action.get('title')),
-						)
+				insert into `UserActivity` (parent, created_at, user, topic_id,
+				post_number, title) values (%s,'%s', '%s','%s',%s,'%s')
+			"""%(	
+					parent,
+					action.get('created_at'),
+					user,
+					action.get('topic_id'),
+					action.get('post_number'),
+					escape(action.get('title')),
+				)
 			set_values(query, db_config)
 
 	if not activity_report:
@@ -164,10 +164,11 @@ def get_activity_summery():
 
 
 	query = """ select ua.*, t.slug from `UserActivity` ua inner join `Topics` t on t.id=ua.parent
-				where (created_at between "{start_date}" and "{end_date}")""".format(
-					start_date=format_date(days=7),
-					end_date=format_date(days=1)
-				)
+		where (created_at between "{start_date}" and "{end_date}")""".format(
+			start_date=format_date(days=7),
+			end_date=format_date(days=1)
+		)
+
 	results = get_values(query, db_config, as_dict=True)
 	if not results:
 		return {}
@@ -196,33 +197,39 @@ def get_activity_summery():
 def get_total_reply_count():
 	totals = {}
 	query = """ select user, count(id) as total from UserActivity where 
-				(created_at between "{start_date}" and "{end_date}") group by user""".format(
-					start_date=format_date(days=7),
-					end_date=format_date(days=1)
-				)
+		(created_at between "{start_date}" and "{end_date}") group by user""".format(
+			start_date=format_date(days=7),
+			end_date=format_date(days=1)
+		)
 	results = get_values(query, db_config, as_dict=True)
 	for result in results:
 		totals.update({ result.get("user"): result.get("total") })
 	return totals
 
-def mail_activity_report(user_wise_summary):
+def mail_activity_report(users, user_wise_summary):
 	active_users = []
-	mail_content = jenv.get_template("mail_template.html").render({
-						"base_url": base_url,
-						"user_wise_summary": user_wise_summary,
-						"users": users,
-						"from_date": format_date(days=7),
-						"to_date": format_date(days=1),
-						"totals": get_total_reply_count()
-					})
-	mail_subject = subject.format(
-		from_date=format_date(date_format="%d-%b-%y", days=7),
-		to_date=format_date(date_format="%d-%b-%y", days=1)
-	)
+	did_not_reply = []
 
 	if keep_active_user_in_cc:
 		active_users = [users.get(user).get("email") for user in user_wise_summary.keys()]
 
+	did_not_reply = set(users.keys()) - set(user_wise_summary.keys())
+	did_not_reply = ", ".join([users.get(user, {}).get("fullname", "") for user in did_not_reply])
+	
+	mail_content = jenv.get_template("mail_template.html").render({
+		"users": users,
+		"base_url": base_url,
+		"to_date": format_date(days=1),
+		"did_not_reply": did_not_reply,
+		"from_date": format_date(days=7),
+		"totals": get_total_reply_count(),
+		"user_wise_summary": user_wise_summary
+	})
+
+	mail_subject = subject.format(
+		from_date=format_date(date_format="%d-%b-%y", days=7),
+		to_date=format_date(date_format="%d-%b-%y", days=1)
+	)
 	send_mail(mail_pwd, recipients=recipients, sender=sender, 
 		subject=mail_subject, mail_content=mail_content, cc=active_users)
 
@@ -231,8 +238,8 @@ def get_users_activity_records(base_url, users):
 		return None
 
 	user_reports = {}
-	user_wise_summary = []
-	for user in users:
+	user_wise_summary = {}
+	for user in users.keys():
 		try:
 			url = activity_url.format(base_url=base_url, username=user)
 			actions = get_user_actions(url)
@@ -243,17 +250,13 @@ def get_users_activity_records(base_url, users):
 			save_activity_report_to_db(user, activity_report)
 
 		except Exception, e:
-			import traceback
-			print e
-			print traceback.print_exc()
-
+			pass
 	try:
 		if format_date(date_format="%a") == "Sun":
-			print "sending mail"
 			user_wise_summary = get_activity_summery()
-			mail_activity_report(user_wise_summary)
+			mail_activity_report(users, user_wise_summary)
 	except Exception, e:
-		raise e
+		pass
 
 def escape(txt, percent=True):
 	"""Excape quotes and percent in given string."""
@@ -261,7 +264,6 @@ def escape(txt, percent=True):
 		txt = (txt or "").encode("utf-8")
 
 	txt = unicode(MySQLdb.escape_string(txt), "utf-8").replace("`", "\\`")
-
 
 if __name__ == "__main__":
 	if len(sys.argv) == 2:

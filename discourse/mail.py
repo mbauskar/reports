@@ -39,7 +39,4 @@ def send_mail(pwd, sender="", recipients=[],  cc=[], mail_content="", subject=""
 		server.close()
 		return True
 	except Exception, e:
-		import traceback
-		print traceback.print_exc()
-		print e
 		return False

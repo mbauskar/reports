@@ -1,6 +1,5 @@
 <div>
-	<p><b>Respected Sir/Madam,</b></p>
-	<p>Please find the User's Discuss forum activity report for the past week from {{ from_date }} to {{ to_date }}</p>
+	<p>Weekly discuss forum activity report for the past week from {{ from_date }} to {{ to_date }}</p>
 	<table style="border-collapse: collapse;border-spacing: 0;empty-cells: show;border: 1px solid #cbcbcb;" width="85%" align="center">
 		<thead style="background-color: #e0e0e0;color: #000;text-align: left;vertical-align: bottom;">
 			<tr style="border: 1px solid #cbcbcb;">
@@ -25,9 +24,7 @@
 			{% endfor %}
 		</tbody>
 	</table>
-	<p style="font-size: 12px;">Please Note this is system generated report please go to discuss.erpnext.com for user's activity details</p>
-	<p><b>Thanks & Regards,</b><br>
-	<b>Makarand Bauskar</b><br>
-	Software Developer,<br>
-	Frappe Technologies Pvt Ltd</p>
+	{% if did_not_reply %}
+	<p>No forum replies from: {{ did_not_reply }}</p>
+	{% endif %}
 </div>

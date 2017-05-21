@@ -19,7 +19,7 @@
 			"email": "rohit@erpnext.com"
 		},
 		"rmehta": {
-			"fullname": "Rushab Mehta",
+			"fullname": "Rushabh Mehta",
 			"email": "rushabh@erpnext.com"
 		},
 		"umair": {
@@ -61,14 +61,15 @@
 		"prakash": {
 			"fullname": "Prakash Hodage",
 			"email": "prakash@erpnext.com"
-		},
+		}
 	},
 	"recipients": [
-		"team@erpnext.com"
+		"team@erpnext.com",
+		"makarand@erpnext.com"
 	],
 	"keep_active_user_in_cc": false,
-	"sender": "makarand.b@erpnext.com",
-	"mail_subject": "[Report][User Activity] ERPNext Discuss Forum Report ({from_date} to {to_date})",
+	"sender": "makarand@erpnext.com",
+	"mail_subject": "Weekly Discuss Activity Report",
 	"base_url": "https://discuss.erpnext.com",
 	"activity_url": "{base_url}/user_actions.json?username={username}&filter=5,6&acting_username={username}&order=created_at&ascending=false"
 }
