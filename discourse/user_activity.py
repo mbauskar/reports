@@ -254,16 +254,17 @@ def get_users_activity_records(base_url, users):
 	try:
 		if format_date(date_format="%a") == "Sun":
 			user_wise_summary = get_activity_summery()
-			mail_activity_report(users, user_wise_summary)
+			# mail_activity_report(users, user_wise_summary)
 	except Exception, e:
 		pass
 
 def escape(txt, percent=True):
 	"""Excape quotes and percent in given string."""
+	# print txt, isinstance(txt, unicode)
 	if isinstance(txt, unicode):
 		txt = (txt or "").encode("utf-8")
 
-	txt = unicode(MySQLdb.escape_string(txt), "utf-8").replace("`", "\\`")
+	return unicode(MySQLdb.escape_string(txt), "utf-8").replace("`", "\\`")
 
 if __name__ == "__main__":
 	if len(sys.argv) == 2:
